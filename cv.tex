@@ -1,26 +1,10 @@
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-%
-% Important note:
-% This template requires the resume.cls file to be in the same directory as the
-% .tex file. The resume.cls file provides the resume style used for structuring the
-% document.
-
-%
-% Creator Peilin Li
-% Contact me via twitter/wechat: @pe1l1nl1
-% linkedin.com/peill and/or github/ppeill
-% Inspired by Peppa Pig 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 %----------------------------------------------------------------------------------------
 %	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
 %----------------------------------------------------------------------------------------
 
-\documentclass{cv} % Use the custom resume.cls style
+\documentclass{cv} % Requires cv.cls in the same directory
 
 \usepackage[left=0.40in,top=0.3in,right=0.75in,bottom=0.1in]{geometry} % Document margins
-\usepackage{fontawesome}
 \usepackage{times}
 \usepackage{url}
 %----------------------------------------------------------------------------------------
@@ -36,42 +20,203 @@
 \DefineBibliographyExtras{english}{\uspunctuation} % Commas/periods inside quotes
 \renewcommand*{\newunitpunct}{\addcomma\space} % Comma-separated: Authors, "Title," Venue, Year.
 \DeclareFieldFormat{journaltitle}{\mkbibemph{#1}}
+\DeclareFieldFormat{howpublished}{\mkbibemph{#1}}
+\DeclareFieldFormat[misc]{title}{\mkbibquote{#1\isdot}} % Quote poster titles like paper titles
 \renewbibmacro*{issue+date}{\setunit{\addcomma\space}\usebibmacro{date}\newunit} % Article year without parens
 \renewcommand*{\finalnamedelim}{\addspace\&\space} % "A, B \& C"
 \renewcommand*{\mkbibcompletename}[1]{\ifdefstring{\namepartfamily}{Kurlandski}{\textbf{#1}}{#1}} % Bold my name
 \defbibenvironment{bibliography} % Dash-bulleted hanging paragraphs matching the rest of the CV, no numbers
-  {\setlength{\parskip}{1pt}\advance\leftskip 0.8em\vspace{3pt}}
+  {\setlength{\parskip}{1pt}\advance\leftskip 0.8em\vspace{3pt}%
+   \hyphenpenalty=10000\exhyphenpenalty=10000\emergencystretch=3em} % No hyphenation, so titles extract as whole words
   {\endgraf}
   {\endgraf\leavevmode\hspace*{-0.8em}\makebox[0.8em][l]{-}}
-\usepackage{hyperref}
-\newcommand{\tab}[1]{\hspace{.2667\textwidth}\rlap{#1}}
-\newcommand{\itab}[1]{\hspace{0em}\rlap{#1}}
+\defbibfilter{archival}{keyword=conference or keyword=journal}
+\defbibfilter{alltalks}{keyword=poster or keyword=minortalk}
+\BiblatexSplitbibDefernumbersWarningOff % Numbers aren't printed, so split bibliographies are fine
+\newcommand{\pubheading}[1]{\vspace{2pt}{\itshape #1}} % Sub-heading within Publications
+\usepackage[hidelinks]{hyperref}
+\newif\ifextras \extrasfalse % \extrastrue also prints minor talks and small projects, kept for the record
 
-\name{Luke Kurlandski} % Your name 
+% Research statement variants: to tailor the CV for a role, add a variant and point \researchstatement at it.
+\newcommand{\statementGeneral}{%
+My Ph.D. research develops deep learning methods for malware detection and analysis, including language
+models trained on executable code, adversarial attacks on malware classifiers, and detectors that generalize
+across platforms. Going forward, I plan to continue research at the intersection of machine learning and
+security, with particular interest in the robustness of large language models and their applications to
+defensive security.}
+\newcommand{\researchstatement}{\statementGeneral}
 
-\address{
-\faEnvelope{\hspace{0.1ex} lk3591@g.rit.edu} \hspace{0.75ex}
-\faGithub{\hspace{0.1ex} @lkurlandski}  \hspace{0.75ex}
-\faLinkedin{\hspace{0.1ex} @luke-kurlandski} \hspace{0.75ex}
-\faGraduationCap{\hspace{0.1ex} @Luke Kurlandski}
+\name{Luke Kurlandski} % Your name
+
+% Plain-text links (no icons) so the full URLs survive PDF text extraction by automated screeners.
+\newcommand{\addrsep}{\enspace$\cdot$\enspace}
+\address{\href{mailto:luke.kurlandski@gmail.com}{luke.kurlandski@gmail.com}
+% \addrsep \href{https://WEBSITE}{WEBSITE} % TODO: personal website
+}
+\address{\href{https://github.com/lkurlandski}{github.com/lkurlandski}
+\addrsep \href{https://www.linkedin.com/in/luke-kurlandski}{linkedin.com/in/luke-kurlandski}
+\addrsep \href{https://scholar.google.com/citations?user=4iWTGSwAAAAJ}{scholar.google.com/citations?user=4iWTGSwAAAAJ}
 }
 
 \begin{document}
 
 %----------------------------------------------------------------------------------------
+%	Research Interests
+%----------------------------------------------------------------------------------------
+\begin{rSection}{Research Interests}
+\researchstatement
+\end{rSection}
+
+%----------------------------------------------------------------------------------------
 %	Education
 %----------------------------------------------------------------------------------------
 \begin{rSection}{Education}
-	
-{\bf Doctor of Philosophy (Ph.D.) @Rochester Institute of Technology (RIT) } \hfill {\em Aug. 2022 - current} 
-\\ - Department: Computing and Information Science
-\\ - Advised by: Dr. Matthew Wright \& Dr. Yin Pan
 
-{\bf Bachelor of Science (B.S.) @The College of New Jersey (TCNJ) } \hfill {\em Aug. 2018 - May 2022} 
-\\ - Department: Computer Science
+{\bf Ph.D., Computing and Information Science, Rochester Institute of Technology} \hfill {\em Aug. 2022 -- May 2027 (expected)}
+% \\ - Dissertation: \textit{TITLE} % TODO: dissertation title
+\\ - Advisors: Dr. Matthew Wright \& Dr. Yin Pan
+\\ - NSF Graduate Research Fellow
+
+{\bf B.S., Computer Science, The College of New Jersey (TCNJ)} \hfill {\em Aug. 2018 -- May 2022}
 \\ - Minors: Mathematics, Physics
 
 \end{rSection}
+
+%--------------------------------------------------------------------------------
+%    Publications
+%--------------------------------------------------------------------------------
+\begin{rSection}{Publications}
+\nocite{*}
+\pubheading{Under Review}
+\printbibliography[heading=none, keyword=underreview]
+
+\pubheading{Conference \& Journal Papers}
+\printbibliography[heading=none, filter=archival]
+
+\pubheading{Workshop Papers}
+\printbibliography[heading=none, keyword=workshop]
+
+\pubheading{Posters \& Talks}
+\ifextras
+\printbibliography[heading=none, filter=alltalks]
+\else
+\printbibliography[heading=none, keyword=poster]
+\fi
+\end{rSection}
+
+%--------------------------------------------------------------------------------
+%    Research Experience
+%--------------------------------------------------------------------------------
+\begin{rSection}{Research Experience}
+
+{\bf Malware \& Machine Learning, RIT}  \hfill {\em Aug. 2022 -- Present}
+\\{\textit{Graduate Research Assistant}; advised by Dr. Matthew Wright \& Dr. Yin Pan.}
+\\- Language-model approaches to malware detection that move beyond raw-byte classifiers (NDSS 2026).
+\\- Evaluating which architectural structure and scale raw-binary malware classifiers need (under review).
+\\- Adversarial malware generation that evades detectors by substituting only API calls (WoRMA 2025).
+\\- Collaboration on cross-platform malware detection via unsupervised domain alignment (under review).
+\\- Collaboration on moving target defense for IoT malware detection (SERP4IoT 2026).
+\\- Collaborations with researchers at Google, Ariel University, and Queen's University Belfast. % Affiliations as listed on the papers
+
+{\bf Cybersecurity Division, CACI International} \hfill {\em Jun. 2021 -- Aug. 2021}
+\\{\textit{Research Intern}}
+\\- Researched deepfake audio detection for US Department of Defense (DoD) cybersecurity applications.
+
+{\bf Learning Curve Group, TCNJ} \hfill {\em Feb. 2021 -- May 2022}
+\\{\textit{Undergraduate Researcher}; advised by Dr. Michael Bloodgood.}
+\\- Researched active learning stopping methods for low-resource text classification (ICSC 2022).
+
+{\bf Collective Intelligence Group, TCNJ} \hfill {\em Jun. 2020 -- Feb. 2021}
+\\{\textit{Undergraduate Research Assistant} (REU, NSF-funded); advised by Dr. Monisha Pulimood.}
+\\- Built a hybrid machine learning recommendation system for academic literature (SIGCSE 2021 poster).
+
+{\bf Photonics \& Materials Science Group, TCNJ} \hfill {\em Dec. 2018 -- Feb. 2020}
+\\{\textit{Undergraduate Researcher}; advised by Dr. David McGee.}
+\\- Researched optical microstructures; wrote APIs for laboratory hardware and GUI applications for experiments.
+\end{rSection}
+
+%--------------------------------------------------------------------------------
+%    Fellowships & Awards
+%--------------------------------------------------------------------------------
+\begin{rSection}{Fellowships \& Awards}
+% Dollar amounts are recorded in comments for reference. Per CLAUDE.md, only grants raised via a
+% proposal show an amount in the CV itself.
+{\bf Provost's Outstanding Graduate Student Teaching Award, RIT} \hfill {\em 2024 -- 2025} % $500
+\\ {\bf NSF Graduate Research Fellowship (GRFP)} \hfill {\em Apr. 2024} % approx. $40K
+\\ {\bf NDSEG Fellowship} (declined in favor of NSF GRFP) \hfill {\em Mar. 2024} % approx. $40K; declined
+\\ {\bf AI Seed Fund Grant, RIT} (\$5,000; wrote the funded proposal) \hfill {\em Jan. 2024} % $5,000; not PI
+\\ {\bf Goldberg-Neff Scholarship for graduate research, TCNJ} \hfill {\em May 2022} % $250
+\\ {\bf Phi Beta Kappa; Upsilon Pi Epsilon (CS Honor Society), TCNJ} \hfill {\em May 2022}
+\\ {\bf Department of Computer Science First-Year Award, TCNJ} \hfill {\em May 2019}
+\\ {\bf Four-Year Merit Scholarship, TCNJ} \hfill {\em Aug. 2018 -- May 2022} % $8,000/yr x 4 = $32,000; unnamed when awarded (TCNJ now calls it the Presidential Scholarship)
+\\ {\bf Dean's List, all eight semesters, TCNJ} \hfill {\em Aug. 2018 -- May 2022}
+\end{rSection}
+
+%--------------------------------------------------------------------------------
+%    Teaching, Mentoring & Leadership
+%--------------------------------------------------------------------------------
+\begin{rSection}{Teaching, Mentoring \& Leadership}
+
+	{\textbf{Instructor, RIT}} \hfill {\em Jan. 2024 -- May 2024}
+    \\- Taught graduate research seminar on Advanced Malware Forensics.
+
+	{\textbf{Graduate Teaching Assistant, RIT}} \hfill {\em Aug. 2023 -- Dec. 2023}
+    \\- Graduate research seminar on Human Factors in Security and Privacy.
+
+   	{\textbf{Research Mentor, RIT}} \hfill {\em Jan. 2023 -- Present}
+    \\- Mentored 19 students: 7 one-on-one independent studies (5 B.S., 2 M.S.) and 3 capstone teams (12 B.S.).
+
+   	{\textbf{Lead Undergraduate Researcher, TCNJ}} \hfill {\em Aug. 2021 -- May 2022}
+    \\- Student lead among undergraduate researchers in the Learning Curve Group.
+
+   	{\textbf{Founder, Kappa Delta Rho Nu Gamma Chapter, TCNJ}} \hfill {\em Jan. 2019 -- May 2022}
+    \\- Established the Nu Gamma Chapter of the Kappa Delta Rho fraternity at TCNJ.
+
+   	{\textbf{GED Instructor, Oasis -- A Haven for Women and Children, Paterson, NJ}} \hfill {\em Nov. 2017 -- May 2018}
+    \\- Taught math, science, and English to adults preparing for the General Educational Development (GED) exam.
+
+\end{rSection}
+
+%--------------------------------------------------------------------------------
+%    Projects (hidden unless \extrastrue; small projects that did not lead to publications)
+%--------------------------------------------------------------------------------
+\ifextras
+\begin{rSection}{Projects}
+
+	{\bf Explaining MalConv} {\small \textit{\url{github.com/lkurlandski/MalConv2}}} \hfill {\em Oct. 2022}
+	\\- Explainable-AI analysis of the byte patterns the MalConv malware classifier relies on.
+	\\- Python, C++, PyTorch, Captum, pefile, LIEF, Capstone.
+
+	{\bf MDALTH} {\small \textit{\url{github.com/lkurlandski/MDALTH}}} \hfill {\em Jun. 2023}
+	\\- Modular deep active learning library with high-level wrappers for Hugging Face pretrained models.
+	\\- Python, PyTorch, Hugging Face Transformers, Datasets, Tokenizers.
+
+	{\bf Adversarial Evasion Attacks} {\small \textit{\url{github.com/lkurlandski/AdversarialEvasion}}} \hfill {\em Apr. 2023}
+	\\- Implemented FGSM and PGD adversarial attacks to evade pretrained image classifiers.
+	\\- Python, PyTorch.
+
+	{\bf Website Traffic Fingerprinting} {\small \textit{\url{github.com/lkurlandski/WebsiteFingerprinting}}} \hfill {\em Mar. 2023}
+	\\- Trained deep learning classifiers to perform website traffic fingerprinting.
+	\\- Python, PyTorch, TensorFlow.
+
+	{\bf scikit-AL} {\small \textit{\url{github.com/lkurlandski/ActiveLearning}}} \hfill {\em Jan. 2022 -- Aug. 2022}
+	\\- Framework for analyzing active learning stopping methods and query algorithms.
+	\\- Python, scikit-learn, Hugging Face, ModAL.
+
+	{\bf Collective Recommender} \hfill {\em May 2020 -- Nov. 2020}
+	\\- Hybrid recommendation system to help users find relevant academic literature.
+	\\- Python, PostgreSQL, LightFM, NetworkX, pandas, psycopg2.
+
+	{\bf Tchisla Solver} {\small \textit{\url{github.com/lkurlandski/TchislaSolver}}} \hfill {\em Jan. 2020 -- May 2020}
+	\\- Dynamic programming algorithm and web application (\url{luke-kurlandski.shinyapps.io/TchislaSolver}) that solves the math puzzle game \textit{Tchisla}.
+	\\- Python, R.
+
+	{\bf Newport Hologram Creation} {\small \textit{\url{github.com/lkurlandski/Newport-Hologram-Creation}}} \hfill {\em Jan. 2019 -- May 2019}
+	\\- API to control laboratory equipment and a GUI application to run experiments that create holograms.
+	\\- Python, PySerial, tkinter.
+
+\end{rSection}
+\fi
 
 %--------------------------------------------------------------------------------
 %    Skills
@@ -79,171 +224,11 @@
 \begin{rSection}{Skills}
 
 \begin{tabular}{ @{} >{\bfseries}l @{\hspace{6ex}} l }
-Languages: \ & Python, MatLab, R, Mathematica, Java, C++, C, Rust
-\\ Libraries: \ & PyTorch, huggingface, scikit-learn, TensorFlow
-\\ Tools: \ & Git, SLURM, GNU-Linux, LaTeX
-\\ Security: \ & IDA, redare2, ghidra, OllyDbg
+ML: \ & PyTorch, Hugging Face (Transformers, Datasets), scikit-learn, TensorFlow, Captum
+\\ Security: \ & IDA Pro, Ghidra, radare2, OllyDbg, pefile, LIEF, Capstone
+\\ Languages: \ & Python, C, C++, Rust, Java, R, MATLAB, Mathematica
+\\ Systems: \ & Linux, SLURM / HPC clusters, Git, LaTeX
 \end{tabular}
-
-\end{rSection}
-
-
-%--------------------------------------------------------------------------------
-%    Objective
-%--------------------------------------------------------------------------------
-\iffalse
-\begin{rSection}{Objective}
-To work for an organization which provides me the opportunity to improve my skills and knowledge to grow along with the organization objective.
-\end{rSection}
-\fi
-
-%--------------------------------------------------------------------------------
-%    Research
-%--------------------------------------------------------------------------------
-\begin{rSection}{Research Experience}
-	
-{\bf Malware \& ML, RIT}  \hfill {\em Aug. 2022 - current} 
-\\{\textit{Graduate Research Assistant}; advised by Dr. Yin Pan \& Dr. Matthew Wright.}
-\\- Researched malware classification and adversarial malware generation using state-of-the-art deep learning tech.
-
-{\bf Learning Curve, TCNJ} \hfill {\em Feb. 2021 - May 2022} 
-\\{\textit{Undergraduate Research Assistant}; advised by Dr. Michael Bloodgood.}
-\\- Researched active learning stopping methods for low-resource natural language processing tasks.
-
-{\bf Cybersecurity Division, CACI International} \hfill {\em Jun. 2021 - Aug. 2021} 
-\\{\textit{Research Intern}}
-\\- Researched deepfake audio detection for US Department of Defense (DoD) cybersecurity applications.
-
-{\bf Collective Intelligence, TCNJ} \hfill {\em Jun. 2020 - Feb. 2021} 
-\\{\textit{Undergraduate Research Assistant}; advised by Dr. Monisha Pulimood}
-\\- Researched collective intelligence for web-applications and built machine learning recommendation system.
-
-{\bf Photonics \& Materials Science, TCNJ} \hfill {\em Dec. 2018 - Feb. 2020} 
-\\{\textit{Undergraduate Research Assistant}; advised by Dr. David McGee}
-\\- Researched optical microstructures; wrote APIs for laboratory hardware and GUI applications for experiments.
-\end{rSection}
-
-%--------------------------------------------------------------------------------
-%    Publications
-%--------------------------------------------------------------------------------
-%\iffalse
-
-\begin{rSection}{Publications}
-\nocite{*}
-\printbibliography[heading=none]
-\end{rSection}
-
-\pagebreak
-
-\begin{rSection}{Posters \& Talks}
-	
-	- \textbf{Kurlandski, L.}, Pan, Y. Wright, M. ``From Bytes to Insights: A New Era of Malware Detection''. In preparation to be presented at \textit{Western New York Image and Signal Processing Workshop (WNYISPW)}. 2023.
-	
-	- \textbf{Kurlandski, L.} ``Transferring Benignness to Assembly Instructions''. Presented in fulfillment of RIT's research potential assessment for Ph.D. students. 2023.
-	
-	- \textbf{Kurlandski, L.}, Pan, Y. Wright, M. ``An Adversarial Malware Evasion Attack Using Machine Translation''. Presented at \textit{AI@RIT Summit}. 2022.
-
-	- \textbf{Kurlandski, L.} ``Detecting Deepfake Audio with Deep Neural Networks''. Presented in fulfillment of TCNJ's student capstone. 2022.
-
-\end{rSection}
-
-%--------------------------------------------------------------------------------
-%    Projects
-%--------------------------------------------------------------------------------
-%\iffalse
-\begin{rSection}{Projects}
-	
-	{\textbf{MDALh}} \hfill {\em Jun. 2023 - current} 
-	\\{\small \textit{\url{github.com/lkurlandski/MDALTH}}}
-	\\- A modular deep active learning library with high-level wrappers for huggingface pretrained models.
-	\\ - Used Python with PyTorch, transformers, datasets, tokenizers, etc.
-
-	{\bf Explaining MalConv} \hfill  {\em Oct. 2022 - current} 
-    \\{\small \textit{\url{github.com/lkurlandski/MalConv2}}}
-	\\- Identify notable malware byte patterns for MalConv malware classifier using explainable AI techniques.
-	\\- Used Python, C++ with PyTorch, captum, pefile, LIEF, capstone, etc.
-
-	{\bf Adversarial Evasion Attacks}  \hfill  {\em Apr. 2023} 
-	\\{\small \textit{\url{github.com/lkurlandski/AdversarialEvasion}}}
-	\\- Implemented FGSM and PGD adversarial attacks to evade pretrained image classifiers.
-	\\- Used Python with PyTorch, etc.
-
-	{\bf Website Traffic Fingerprinting}  \hfill  {\em Mar. 2023} 
-	\\{\small \textit{\url{github.com/lkurlandski/WebsiteFingerprinting}}}
-	\\- Trained deep learning classifiers to perform website traffic fingerprinting.
-	\\- Used Python with PyTorch, TensorFlow, etc.
-
-	{\bf scikit-AL}  \hfill  {\em Jan. 2022 - Aug. 2022} 
-    \\{\small \textit{\url{github.com/lkurlandski/ActiveLearning}}}
-	\\- A framework for analyzing active learning stopping methods and query algorithms.
-	\\- Used Python with scikit-learn, huggingface, ModAL, etc.
-
-	{\bf Collective Recommender}  \hfill  {\em May 2020 - Nov. 2020} 
-	\\- A hybrid recommendation system to help users find relevant academic literature.
-	\\- Used Python \& PostgresSQL with LightFM, NetworkX, pandas, psycopg2, etc.
-
-   	{\bf Tchisla Solver}  \hfill  {\em Jan. 2020 - May 2020} 
-    \\{\small \textit{\url{https://github.com/lkurlandski/TchislaSolver}}}
-    \\{\small \textit{\url{https://luke-kurlandski.shinyapps.io/TchislaSolver/}}}
-    \\- A dynamic programming algorithm and web application to find solutions for the math puzzle game, \textit{Tchisla}.
-    \\- Used Python \& R
-
-	{\bf Newport Hologram Creation}  \hfill  {\em Jan. 2019 - May 2019} 
-    \\{\small \textit{\url{github.com/lkurlandski/Newport-Hologram-Creation}}}
-	\\- An API to control laboratory equipment and a GUI application to run experiments that create holograms.
-	\\- Used Python with PySerial, tkinter, etc.
-
-\end{rSection}
-
-\pagebreak
-
-\begin{rSection}{Teaching \& Leadership}
-
-	{\textbf{Instructor, RIT}} \hfill {\em Jan. 2024 - May 2024} 
-    \\- Instructed graduate research seminar on Advanced Malware Forensics.
-
-	{\textbf{Graduate Teaching Assistant, RIT}} \hfill {\em Aug. 2023 - Dec. 2024} 
-    \\- Aid for graduate research seminar on Human Factors in Security and Privacy.
-
-   	{\textbf{Research Mentor, RIT}} \hfill {\em Jan. 2023 - current} 
-    \\- Mentored undergraduate students for capstone projects, summer research experiences, and independent studies.
-
-   	{\textbf{Lead Undergraduate Research Assistant, TCNJ}} \hfill {\em Aug. 2021 - May. 2022} 
-    \\- Student lead among undergraduate RAs (Learning Curve Group).
-
-   	{\textbf{GED Tutor, TCNJ}} \hfill {\em Nov. 2017 - May. 2018} 
-    \\- Taught math/science/english to adults seeking to earn their general equivalency degree.
-
-\end{rSection}
-
-\begin{rSection}{Awards \& Honors}
-
-    {\textbf{National Science Foundation (NSF) Graduate Research Fellowship Program (GRFP) (recipient)}} \hfill {\em Apr. 2024} 
-    \\ - Recipient of prestigious national fellowship program.
-
-    {\textbf{National Defense Science and Engineering Graduate (NDSEG) Fellowship (recipient)}} \hfill {\em Mar. 2024} 
-    \\ - Recipient of prestigious national fellowship program. Declined due to conflict with GRFP.
-
-    {\textbf{AI Seed Fund (recipient), RIT}} \hfill {\em Jan. 2024} 
-    \\ - Recipient of local funding competition at RIT.
-
-    {\textbf{Goldberg-Neff Scholarship (recipient), TCNJ}} \hfill {\em May 2022} 
-    \\ - Recipient of scholarship for graduating students pursuing graduate research.
-
-	{\textbf{Upsilon Pi Epsilon Computer Science Honor's Society (member), TCNJ}} \hfill {\em May 2022}
-    \\ - Inducted as a member into the distinguished national Honor's Society.
-
-	{\textbf{Phi Beta Kappa Honor's Society (member), TCNJ}} \hfill {\em May 2022} 
-    \\ - Inducted as a member into the distinguished national Honor's Society.
-
-	{\textbf{Kappa Delta Rho Nu Gamma Chapter (founder), TCNJ}} \hfill {\em Jan. 2019 - May 2022} 
-    \\ - Established the Nu Gamma Chapter of Kappa Delta Rho fraternity at TCNJ.
-
-	{\textbf{Department of Computer Science Award (recipient), TCNJ}} \hfill {\em May 2019}
-    \\ - Recipient of department award for first-year students.
-
-	{\textbf{Dean's List 8/8 semesters, TCNJ}} \hfill {\em Aug. 2018 - May 2022}
-    \\ - Maintained a GPA above 3.5 all eight semesters of undergraduate.
 
 \end{rSection}
 
