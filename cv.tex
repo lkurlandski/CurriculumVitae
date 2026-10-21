@@ -5,6 +5,7 @@
 \documentclass{cv} % Requires cv.cls in the same directory
 
 \usepackage[left=0.40in,top=0.3in,right=0.75in,bottom=0.1in]{geometry} % Document margins
+\usepackage{fontawesome}
 \usepackage{times}
 \usepackage{url}
 %----------------------------------------------------------------------------------------
@@ -26,14 +27,14 @@
 \renewcommand*{\finalnamedelim}{\addspace\&\space} % "A, B \& C"
 \renewcommand*{\mkbibcompletename}[1]{\ifdefstring{\namepartfamily}{Kurlandski}{\textbf{#1}}{#1}} % Bold my name
 \defbibenvironment{bibliography} % Dash-bulleted hanging paragraphs matching the rest of the CV, no numbers
-  {\setlength{\parskip}{1pt}\advance\leftskip 0.8em\vspace{3pt}%
+  {\setlength{\parskip}{3pt}\advance\leftskip 0.8em\vspace{3pt}%
    \hyphenpenalty=10000\exhyphenpenalty=10000\emergencystretch=3em} % No hyphenation, so titles extract as whole words
   {\endgraf}
   {\endgraf\leavevmode\hspace*{-0.8em}\makebox[0.8em][l]{-}}
 \defbibfilter{archival}{keyword=conference or keyword=journal}
 \defbibfilter{alltalks}{keyword=poster or keyword=minortalk}
 \BiblatexSplitbibDefernumbersWarningOff % Numbers aren't printed, so split bibliographies are fine
-\newcommand{\pubheading}[1]{\vspace{2pt}{\itshape #1}} % Sub-heading within Publications
+\newcommand{\pubheading}[1]{\par\vspace{2pt}\noindent\hspace*{-0.8em}{\itshape #1}} % Sub-heading within Publications, flush with the entry dashes
 \usepackage[hidelinks]{hyperref}
 \newif\ifextras \extrasfalse % \extrastrue also prints minor talks and small projects, kept for the record
 
@@ -48,14 +49,12 @@ defensive security.}
 
 \name{Luke Kurlandski} % Your name
 
-% Plain-text links (no icons) so the full URLs survive PDF text extraction by automated screeners.
-\newcommand{\addrsep}{\enspace$\cdot$\enspace}
-\address{\href{mailto:luke.kurlandski@gmail.com}{luke.kurlandski@gmail.com}
-% \addrsep \href{https://WEBSITE}{WEBSITE} % TODO: personal website
-}
-\address{\href{https://github.com/lkurlandski}{github.com/lkurlandski}
-\addrsep \href{https://www.linkedin.com/in/luke-kurlandski}{linkedin.com/in/luke-kurlandski}
-\addrsep \href{https://scholar.google.com/citations?user=4iWTGSwAAAAJ}{scholar.google.com/citations?user=4iWTGSwAAAAJ}
+\address{
+\faEnvelope{\hspace{0.1ex} \href{mailto:luke.kurlandski@gmail.com}{luke.kurlandski@gmail.com}} \hspace{0.75ex}
+% \faGlobe{\hspace{0.1ex} \href{https://WEBSITE}{WEBSITE}} \hspace{0.75ex} % TODO: personal website
+\faGithub{\hspace{0.1ex} \href{https://github.com/lkurlandski}{@lkurlandski}} \hspace{0.75ex}
+\faLinkedin{\hspace{0.1ex} \href{https://www.linkedin.com/in/luke-kurlandski}{@luke-kurlandski}} \hspace{0.75ex}
+\faGraduationCap{\hspace{0.1ex} \href{https://scholar.google.com/citations?user=4iWTGSwAAAAJ}{Google Scholar}}
 }
 
 \begin{document}
@@ -111,12 +110,13 @@ defensive security.}
 
 {\bf Malware \& Machine Learning, RIT}  \hfill {\em Aug. 2022 -- May 2027}
 \\{\textit{Graduate Research Assistant}; advised by Dr. Matthew Wright \& Dr. Yin Pan.}
-\\- Language-model approaches to malware detection that move beyond raw-byte classifiers (NDSS 2026).
-\\- Evaluating which architectural structure and scale raw-binary malware classifiers need (under review).
-\\- Adversarial malware generation that evades detectors by substituting only API calls (WoRMA 2025).
-\\- Collaboration on cross-platform malware detection via unsupervised domain alignment (under review).
-\\- Collaboration on moving target defense for IoT malware detection (SERP4IoT 2026).
-\\- Collaborations with researchers at Google, Ariel University, and Queen's University Belfast. % Affiliations as listed on the papers
+\\- Researched ML for malware detection with researchers at Google, Ariel University, and Queen's University Belfast.
+% Earlier per-project bullets, kept for the record (the papers themselves are listed under Publications):
+% \\- Language-model approaches to malware detection that move beyond raw-byte classifiers (NDSS 2026).
+% \\- Evaluating which architectural structure and scale raw-binary malware classifiers need (under review).
+% \\- Adversarial malware generation that evades detectors by substituting only API calls (WoRMA 2025).
+% \\- Collaboration on cross-platform malware detection via unsupervised domain alignment (under review).
+% \\- Collaboration on moving target defense for IoT malware detection (SERP4IoT 2026).
 
 {\bf Cybersecurity Division, CACI International} \hfill {\em Jun. 2021 -- Aug. 2021}
 \\{\textit{Research Intern}}
