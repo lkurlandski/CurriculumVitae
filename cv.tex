@@ -25,7 +25,7 @@
 \DeclareFieldFormat[misc]{title}{\mkbibquote{#1\isdot}} % Quote poster titles like paper titles
 \renewbibmacro*{issue+date}{\setunit{\addcomma\space}\usebibmacro{date}\newunit} % Article year without parens
 \renewcommand*{\finalnamedelim}{\addspace\&\space} % "A, B \& C"
-\renewcommand*{\mkbibcompletename}[1]{\ifdefstring{\namepartfamily}{Kurlandski}{\textbf{#1}}{#1}} % Bold my name
+\renewcommand*{\mkbibcompletename}[1]{\ifdefstring{\namepartfamily}{Kurlandski}{\underline{#1}}{#1}} % Bold my name
 \defbibenvironment{bibliography} % Dash-bulleted hanging paragraphs matching the rest of the CV, no numbers
   {\setlength{\parskip}{3pt}\advance\leftskip 0.8em\vspace{3pt}%
    \hyphenpenalty=10000\exhyphenpenalty=10000\emergencystretch=3em} % No hyphenation, so titles extract as whole words
@@ -34,7 +34,7 @@
 \defbibfilter{archival}{keyword=conference or keyword=journal}
 \defbibfilter{alltalks}{keyword=poster or keyword=minortalk}
 \BiblatexSplitbibDefernumbersWarningOff % Numbers aren't printed, so split bibliographies are fine
-\newcommand{\pubheading}[1]{\par\vspace{2pt}\noindent\hspace*{-0.8em}{\itshape #1}} % Sub-heading within Publications, flush with the entry dashes
+\newcommand{\pubheading}[1]{\par\vspace{2pt}\noindent\hspace*{-0.8em}{\bfseries #1}} % Sub-heading within Publications, flush with the entry dashes
 \usepackage[hidelinks]{hyperref}
 \newif\ifextras \extrasfalse % \extrastrue also prints minor talks and small projects, kept for the record
 
