@@ -25,6 +25,7 @@
 \usepackage[parfill]{parskip} % Remove paragraph indentation
 \usepackage{array} % Required for boldface (\bf and \bfseries) tabular columns
 \usepackage{ifthen} % Required for ifthenelse statements
+\usepackage{needspace} % Keeps section titles from being stranded at the bottom of a page
 
 \pagestyle{empty} % Suppress page numbers
 
@@ -94,6 +95,7 @@
 
 % Defines the rSection environment for the large sections within the CV
 \newenvironment{rSection}[1]{ % 1 input argument - section name
+  \needspace{5\baselineskip} % Start a new page unless the title, rule and first entry fit
   \sectionskip
   \MakeUppercase{\bf #1} % Section title
   \sectionlineskip

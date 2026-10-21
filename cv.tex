@@ -4,7 +4,7 @@
 
 \documentclass{cv} % Requires cv.cls in the same directory
 
-\usepackage[left=0.40in,top=0.3in,right=0.75in,bottom=0.1in]{geometry} % Document margins
+\usepackage[left=0.40in,top=0.3in,right=0.75in,bottom=0.3in]{geometry} % Document margins
 \usepackage{fontawesome}
 \usepackage{times}
 \usepackage{url}
@@ -34,7 +34,7 @@
 \defbibfilter{archival}{keyword=conference or keyword=journal}
 \defbibfilter{alltalks}{keyword=poster or keyword=minortalk}
 \BiblatexSplitbibDefernumbersWarningOff % Numbers aren't printed, so split bibliographies are fine
-\newcommand{\pubheading}[1]{\par\noindent\hspace*{-0.8em}{\bfseries #1}} % Sub-heading within Publications, flush with the entry dashes; spaced like an entry title
+\newcommand{\pubheading}[1]{\par\needspace{3\baselineskip}\noindent\hspace*{-0.8em}{\bfseries #1}} % Sub-heading within Publications, flush with the entry dashes; spaced like an entry title
 \usepackage[hidelinks]{hyperref}
 \newif\ifextras \extrasfalse % \extrastrue also prints minor talks and small projects, kept for the record
 \newif\ifawarddescs \awarddescstrue % \awarddescsfalse drops the one-line descriptions under Awards (compact list)
