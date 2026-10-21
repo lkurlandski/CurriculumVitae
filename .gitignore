@@ -11,5 +11,4 @@
 *.synctex.gz
 
 # Local
-backup/
 .DS_Store
