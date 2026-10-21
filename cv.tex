@@ -37,6 +37,11 @@
 \newcommand{\pubheading}[1]{\par\vspace{2pt}\noindent\hspace*{-0.8em}{\bfseries #1}} % Sub-heading within Publications, flush with the entry dashes
 \usepackage[hidelinks]{hyperref}
 \newif\ifextras \extrasfalse % \extrastrue also prints minor talks and small projects, kept for the record
+\newif\ifawarddescs \awarddescstrue % \awarddescsfalse drops the one-line descriptions under Awards (compact list)
+\newif\ifteachingdescs \teachingdescstrue % \teachingdescsfalse drops the one-line descriptions under Teaching (compact list)
+\newcommand{\awarddesc}[1]{\ifawarddescs\\- #1\fi}
+\newcommand{\teachingdesc}[1]{\ifteachingdescs\\- #1\fi}
+\newcommand{\tightentries}{\vspace*{\parskip}\setlength{\parskip}{0pt}} % No gap between entries; keeps the gap below the section rule
 
 % Research statement variants: to tailor the CV for a role, add a variant and point \researchstatement at it.
 \newcommand{\statementGeneral}{%
@@ -142,42 +147,63 @@ defensive security.}
 %    Fellowships & Awards
 %--------------------------------------------------------------------------------
 \begin{rSection}{Fellowships, Awards, \& Honors}
+\ifawarddescs\else\tightentries\fi
 % Dollar amounts are recorded in comments for reference. Per CLAUDE.md, only grants raised via a
 % proposal show an amount in the CV itself.
 {\bf Provost's Outstanding Graduate Student Teaching Award, RIT} \hfill {\em Apr. 2025} % $500
-\\ {\bf NSF Graduate Research Fellowship (GRFP)} \hfill {\em Apr. 2024} % approx. $40K
-\\ {\bf NDSEG Fellowship} \hfill {\em Mar. 2024} % $40K; declined
-\\ {\bf AI Seed Fund Grant, RIT} \hfill {\em Jan. 2024} % $5,000; not PI
-\\ {\bf Goldberg-Neff Scholarship for graduate research, TCNJ} \hfill {\em May 2022} % $250
-\\ {\bf Phi Beta Kappa (honor society), TCNJ} \hfill {\em May 2022}
-\\ {\bf Upsilon Pi Epsilon (honor society), TCNJ} \hfill {\em May 2022}
-\\ {\bf Department of Computer Science First-Year Award, TCNJ} \hfill {\em May 2019}
-\\ {\bf Merit Scholarship, TCNJ} \hfill {\em Aug. 2018 -- May 2022} % $8,000/yr x 4 = $32,000; unnamed when awarded (TCNJ now calls it the Presidential Scholarship)
-\\ {\bf Dean's List, TCNJ} \hfill {\em Aug. 2018 -- May 2022}
+\awarddesc{Recipient of university-wide award recognizing excellence in teaching by graduate students.}
+
+{\bf NSF Graduate Research Fellowship (GRFP)} \hfill {\em Apr. 2024} % approx. $40K
+\awarddesc{Recipient of prestigious national fellowship program.}
+
+{\bf NDSEG Fellowship} \hfill {\em Mar. 2024} % $40K; declined
+\awarddesc{Recipient of prestigious national fellowship program. Declined due to conflict with GRFP.}
+
+{\bf AI Seed Fund Grant, RIT} \hfill {\em Jan. 2024} % $5,000; not PI
+\awarddesc{Wrote the proposal awarded \$5,000 in a local funding competition at RIT.}
+
+{\bf Goldberg-Neff Scholarship for graduate research, TCNJ} \hfill {\em May 2022} % $250
+\awarddesc{Recipient of scholarship for graduating students pursuing graduate research.}
+
+{\bf Phi Beta Kappa (honor society), TCNJ} \hfill {\em May 2022}
+\awarddesc{Inducted as a member into the national honor society for the liberal arts and sciences.}
+
+{\bf Upsilon Pi Epsilon (honor society), TCNJ} \hfill {\em May 2022}
+\awarddesc{Inducted as a member into the international honor society for the computing disciplines.}
+
+{\bf Department of Computer Science First-Year Award, TCNJ} \hfill {\em May 2019}
+\awarddesc{Recipient of department award for first-year students.}
+
+{\bf Merit Scholarship, TCNJ} \hfill {\em Aug. 2018 -- May 2022} % $8,000/yr x 4 = $32,000; unnamed when awarded (TCNJ now calls it the Presidential Scholarship)
+\awarddesc{Recipient of four-year scholarship awarded to incoming students on academic merit.}
+
+{\bf Dean's List, TCNJ} \hfill {\em Aug. 2018 -- May 2022}
+\awarddesc{Maintained a GPA above 3.5 all eight semesters of undergraduate.}
 \end{rSection}
 
 %--------------------------------------------------------------------------------
 %    Teaching, Mentoring & Leadership
 %--------------------------------------------------------------------------------
 \begin{rSection}{Teaching, Mentoring \& Leadership}
+\ifteachingdescs\else\tightentries\fi
 
 	{\textbf{Instructor, RIT}} \hfill {\em Jan. 2024 -- May 2024}
-    \\- Taught graduate research seminar on Advanced Malware Forensics.
+    \teachingdesc{Taught graduate research seminar on Advanced Malware Forensics.}
 
 	{\textbf{Graduate Teaching Assistant, RIT}} \hfill {\em Aug. 2023 -- Dec. 2023}
-    \\- Graduate research seminar on Human Factors in Security and Privacy.
+    \teachingdesc{Graduate research seminar on Human Factors in Security and Privacy.}
 
    	{\textbf{Research Mentor, RIT}} \hfill {\em Jan. 2023 -- Present}
-    \\- Mentored 19 students: 7 one-on-one independent studies (5 B.S., 2 M.S.) and 3 capstone teams (12 B.S.).
+    \teachingdesc{Mentored 19 students: 7 one-on-one independent studies (5 B.S., 2 M.S.) and 3 capstone teams (12 B.S.).}
 
    	{\textbf{Lead Undergraduate Researcher, TCNJ}} \hfill {\em Aug. 2021 -- May 2022}
-    \\- Student lead among undergraduate researchers in the Learning Curve Group.
+    \teachingdesc{Student lead among undergraduate researchers in the Learning Curve Group.}
 
    	{\textbf{Founder, Kappa Delta Rho Nu Gamma Chapter, TCNJ}} \hfill {\em Jan. 2019 -- May 2022}
-    \\- Established the Nu Gamma Chapter of the Kappa Delta Rho fraternity at TCNJ.
+    \teachingdesc{Established the Nu Gamma Chapter of the Kappa Delta Rho fraternity at TCNJ.}
 
    	{\textbf{GED Instructor, Oasis -- A Haven for Women and Children, Paterson, NJ}} \hfill {\em Nov. 2017 -- May 2018}
-    \\- Taught math, science, and English to adults preparing for the General Educational Development (GED) exam.
+    \teachingdesc{Taught math, science, and English to adults preparing for the General Educational Development (GED) exam.}
 
 \end{rSection}
 
